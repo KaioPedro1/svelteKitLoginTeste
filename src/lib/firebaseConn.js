@@ -1,30 +1,37 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import {
   getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
   GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, onAuthStateChanged, signOut
 } from "firebase/auth";
 import { writable } from 'svelte/store';
-
-export let user= writable(null);
+export let user = writable(null);
 import { goto } from '$app/navigation';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyChvdCHDZ1-f09t1xlTtmIKhOGELzWEe0I",
-  authDomain: "authenticationkaio.firebaseapp.com",
-  projectId: "authenticationkaio",
-  storageBucket: "authenticationkaio.appspot.com",
-  messagingSenderId: "453096558982",
-  appId: "1:453096558982:web:0fa3ee87e8535585c7dc07"
-};
 
+  apiKey: "AIzaSyBxaU4mUKgQFFanwwusulkC7Hk8R1qUDC4",
+
+  authDomain: "teste-c09fe.firebaseapp.com",
+
+  projectId: "teste-c09fe",
+
+  storageBucket: "teste-c09fe.appspot.com",
+
+  messagingSenderId: "27705592203",
+
+  appId: "1:27705592203:web:9b2459181202bf2761478e"
+
+};
 
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
