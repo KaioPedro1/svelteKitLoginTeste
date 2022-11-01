@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {
   getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
-  GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, onAuthStateChanged, signOut
+  GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, onAuthStateChanged, signOut, updateProfile
 } from "firebase/auth";
 import { writable } from 'svelte/store';
 export let user = writable(null);
@@ -35,6 +35,17 @@ export const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+const authUpdateProfile = (name) => {
+  updateProfile(auth.currentUser, {
+    displayName: name
+  }).then(() => {
+    // Profile updated!
+    // ...
+  }).catch((error) => {
+    // An error occurred
+    // ...
+  });
+}
 const authLogoff = () => {
   signOut(auth).then(() => {
     // Sign-out successful.
@@ -49,7 +60,6 @@ const authEmailSenha = async (email, senha) => {
       // Signed in
       user.set(userCredential.user);
       // ...
-      console.log(user);
       goto('/sessoes')
     })
     .catch((error) => {
@@ -58,12 +68,21 @@ const authEmailSenha = async (email, senha) => {
       console.log(errorMessage);
     });
 }
-
-const authCriarEmailSenha = async (email, password) => {
-  createUserWithEmailAndPassword(auth, email, password)
+const authCriarEmailSenha = async (email, password, username) => {
+  createUserWithEmailAndPassword(auth, email, password, username)
     .then((userCredential) => {
       // Signed in 
-      user.set(userCredential.user)
+      user.set(userCredential.user);
+      updateProfile(auth.currentUser, {
+        displayName: username
+      }).then(() => {
+        // Profile updated!
+        goto('/sessoes');
+        // ...
+      }).catch((error) => {
+        // An error occurred
+        // ...
+      });
       // ...
     })
     .catch((error) => {
@@ -72,7 +91,6 @@ const authCriarEmailSenha = async (email, password) => {
       // ..
     });
 }
-
 const authGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -94,7 +112,6 @@ const authGoogle = () => {
       // ...
     });
 }
-
 const recuperarSenha = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
@@ -129,3 +146,4 @@ export const createUserEmailSenha = authCriarEmailSenha;
 export const loginGoogle = authGoogle;
 export const passwordRecover = recuperarSenha;
 export const userLogout = authLogoff;
+export const updateUser = authUpdateProfile;

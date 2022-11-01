@@ -1,10 +1,10 @@
 <script>
     import { Button } from "flowbite-svelte";
-    import GoogleLogo from "../assets/googleLogo.svelte";
-    import GithubLogo from "../assets/githubLogo.svelte";
-    import FacebookLogo from "../assets/facebookLogo.svelte";
-    import TwitterLogo from "../assets/twitterLogo.svelte";
-    import {loginGoogle} from "../lib/firebaseConn"
+    import GoogleLogo from "../../assets/googleLogo.svelte";
+    import GithubLogo from "../../assets/githubLogo.svelte";
+    import FacebookLogo from "../../assets/facebookLogo.svelte";
+    import TwitterLogo from "../../assets/twitterLogo.svelte";
+    import {loginGoogle} from "../../lib/firebaseConn"
 
 </script>
 

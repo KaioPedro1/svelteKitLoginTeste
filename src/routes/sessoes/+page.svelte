@@ -1,8 +1,8 @@
 <script>
 	import { Button } from 'flowbite-svelte';
-	import { user, userLogout } from '../../lib/firebaseConn';
+	import { user, userLogout} from '../../lib/firebaseConn';
 	import { goto } from '$app/navigation';
-	import CardRoom from '../../components/CardsRoom.svelte';
+	import CardRoom from '../../components/sessao/CardsRoom.svelte';
 	import { Spinner, Heading } from 'flowbite-svelte';
 	const SESSOESURL = 'https://anime-nema-v1.herokuapp.com/sessoes';
 	const getSessoes = async () => {
@@ -15,9 +15,10 @@
 <div>
 	{#if $user}
 		<div class="titulo_sessoes text-center">
-			<Heading>Sessões ativas</Heading>
+			<Heading>Sessões ativas</Heading><Button on:click={() => userLogout()}>Logout</Button>
+			{"Bem vindo  " + JSON.stringify($user.displayName)}
 		</div>
-		<div class="p-8 " id="container-cards">
+		<div class="p-8 grid grid-cols-5 gap-3" id="container-cards">
 			{#await getSessoes()}
 				<Spinner />
 			{:then obj}
@@ -30,17 +31,11 @@
 				<h1>Algo deu errado...</h1>
 			{/await}
 		</div>
-		<Button on:click={() => userLogout()}>Sair</Button>
 	{:else}
-		<h1>autenticando usuario</h1>
+		<h1>acesso negado</h1>
 		<Button on:click={() => goto('/')}>Voltar para tela de login</Button>
 	{/if}
 </div>
 
 <style>
-	#container-cards {
-	  display: flex;
-	  justify-content: space-evenly;
-	  flex-wrap: wrap;
-	}
-  </style>
+</style>

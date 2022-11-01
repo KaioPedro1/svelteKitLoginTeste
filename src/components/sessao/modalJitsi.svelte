@@ -1,6 +1,6 @@
 <script>
     import { Modal } from "flowbite-svelte";
-    import {db} from "../lib/firebaseConn";
+    import {db, user} from "../../lib/firebaseConn";
     import { doc, collection, getDocs } from "firebase/firestore";
     export let popupModalJitsi;
     export let sessao_id;
@@ -22,7 +22,7 @@
                 height: "700px",
                 parentNode: parentNode,
                 userInfo: {
-                    displayName: "usuarioID",
+                    displayName: $user.displayName,
                 },
             };
             // @ts-ignore
@@ -38,7 +38,7 @@
 </svelte:head>
 
 <Modal bind:open={popupModalJitsi} size="xl" autoclose={false}>
-    <div class="meet flex p-1" bind:this={parentNode} id="meet" />
+    <div class="meet flex" bind:this={parentNode} id="meet" />
 </Modal>
 
 <style>

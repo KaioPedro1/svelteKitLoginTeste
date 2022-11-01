@@ -1,8 +1,9 @@
 <script>
     // @ts-nocheck
-    import {db} from "../../lib/firebaseConn";
+    import {db} from "../../../lib/firebaseConn";
     import { onSnapshot, doc, collection } from "firebase/firestore";
-    import UsuarioSvg from "../../assets/usuarioSVG.svelte";
+    import UsuarioSvg from "../../../assets/usuarioSVG.svelte";
+    import HostSvg from "../../../assets/hostSVG.svelte";
     import {
         Button,
         Badge,
@@ -10,7 +11,6 @@
         AccordionItem,
         Accordion,
     } from "flowbite-svelte";
-    import HostSvg from "../../assets/hostSVG.svelte";
     export let sessao_id;
     $: roomsUsers = null;
     $: roomHost = null;

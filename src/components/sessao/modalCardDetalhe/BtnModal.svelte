@@ -1,14 +1,13 @@
 <script>
     import { Modal, Tabs, TabItem,Card} from "flowbite-svelte";
     import ListaUsuarios from "./listaUsuarios.svelte";
-    import AnimeModalSvg from "../../assets/animeModalSVG.svelte";
-    import AuditorioModalSvg from "../../assets/auditorioModalSVG.svelte";
-    import SessaoModalSvg from "../../assets/sessaoModalSVG.svelte";
+    import AnimeModalSvg from "../../../assets/animeModalSVG.svelte";
+    import AuditorioModalSvg from "../../../assets/auditorioModalSVG.svelte";
+    import SessaoModalSvg from "../../../assets/sessaoModalSVG.svelte";
     export let anime;
     export let sessao;
     export let auditorio;
     export let popupModalDetalhes;
-    console.log('rendere detlahes')
 </script>
 
 <Modal bind:open={popupModalDetalhes} size="md" autoclose={false}>
